@@ -21,7 +21,7 @@ print("========================================================================"
 print("bienvennue dans le script de creation et d'update d'api")
 #this dictionary contains all the choises you can make in this script
 choises= {
-    "create api",
+    "ceate api",
     "update api"
 }
 #this dictionary contains all the commands to install the necessary packages
@@ -38,7 +38,6 @@ commands= {
     "npm install express-openapi-validator",
     "npm install cors",
     "npm install dotenv"
-    "npm install serve-favicon",
 }
 #inquirer is a library that allows you to ask questions to the user
 questions = [inquirer.List("choise", message="que voulez vous faire", choices=choises)]

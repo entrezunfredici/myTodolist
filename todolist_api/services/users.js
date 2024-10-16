@@ -33,19 +33,19 @@ exports.getUserById = async (id) => {
     });
 }
 
-exports.addUser = async (username, password, usermail) => {
-    // const existingUser = await this.getUserByUsername(username)
-    // if (existingUser) {
-    //     throw new BadRequest('user already exists')
-    // }
-    if (!username || !usermail) {
+exports.addUser = async (username, password, email) => {
+    if (!username || !email) {
         throw new Error('Username and usermail are required');
     }
     if (!password) {
         throw new Error('Password is required');
     }
+    const existingUser = await this.getUserByUsername(username)
+    if (existingUser) {
+        throw new BadRequest('user already exists')
+    }
     return bcrypt.hash(password, 10).then((hash) => {
-        return users.create({username, password: hash, usermail})
+        return users.create({username, password: 'hash', email})
     }).catch((e) => {
         throw new ServerError('Error when performing bcrypt: ', e.message)
     })
@@ -59,7 +59,7 @@ exports.login = async (username, password) => {
 
     const verifiedUser = await bcrypt.compare(password, user.password);
     if (!verifiedUser) {
-        throw new NotFound('no user found for username: ' + username);
+        throw new NotLogged('password incorrect for username');
     }
     return this.createToken(user);
 }
@@ -76,6 +76,15 @@ exports.createToken = async (user) => {
     });
 }
 
-exports.deleteUserByID = async (id) => {
-    return users.destroy({ where: { id } })
+exports.deleteUserById = async (id) => {
+    try{
+        await users.destroy({
+            where:{
+                id
+            }
+        });
+        return true;
+    }catch(e){
+        throw new ServerError(e.message);
+    }
 }

@@ -22,39 +22,16 @@ exports.authMiddleware = async (req, res, next) => {
 }
 
 exports.getUsers = async (req, res, next) => {
-    try {
+    try{
         const users = await usersService.getUsers();
+        if (!users) {
+            throw createError(404, 'no users');
+        }
         res.json(users);
     } catch (error) {
         next(new ServerError());
     }
 }
-
-exports.register = async (req, res, next) => {
-    const {username, password, usermail} = req.body;
-    try {
-        const user = await usersService.addUser(username, password, usermail)
-        if (!user) {
-            throw new ServerError('Cannot register user')
-        }
-        return res.status(201).json(true).send()
-    } catch(e) {
-        return next(createError(e.statusCode, e.message))
-    }
-}
-
-exports.login = async (req, res, next) => {
-    const { username, password } = req.body;
-    try {
-        const token = await usersService.login(username, password);
-        if (token) {
-            return res.status(200).json({ success: true, token });
-        }
-        return res.status(400).json({ success: false, token: ''});
-    } catch(error) {
-        return next(createError(500, error));
-    }
-};
 
 exports.getUserByUsername = async (req, res, next) => {
     try {
@@ -81,3 +58,42 @@ exports.getUserById = async (req, res, next) => {
         next(new ServerError());
     }
 };
+
+exports.register = async (req, res, next) => {
+    const {username, password, email} = req.body;
+    try {
+        const user = await usersService.addUser(username, password, email)
+        if (!user) {
+            throw new ServerError('Cannot register user')
+        }
+        return res.status(201).json(true).send()
+    } catch(e) {
+        return next(createError(e.statusCode, e.message))
+    }
+}
+
+exports.login = async (req, res, next) => {
+    const { username, password } = req.body;
+    try {
+        const token = await usersService.login(username, password);
+        if (token) {
+            return res.status(200).json({ success: true, token });
+        }
+        return res.status(400).json({ success: false, token: ''});
+    } catch(error) {
+        return next(createError(500, error));
+    }
+};
+
+exports.deleteUserById = async (req, res) => {
+    try {
+        const user = await usersService.deleteUserById(req.params.id);
+        if (!user) {
+            res.status(404).json({success: false, message: 'User not found'});
+        } else {
+            res.status(200).json({success: true, message: "user deleted"});
+        }
+    } catch(e) {
+        res.status(500).json({success: false, message: e.message});
+    }
+}
