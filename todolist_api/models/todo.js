@@ -14,6 +14,10 @@ module.exports = (instance) => {
         content: {
             type: DataTypes.TEXT,
             allowNull: false
+        },
+        date: {
+            type: DataTypes.Date,
+            allowNull: false
         }
     })
 }
