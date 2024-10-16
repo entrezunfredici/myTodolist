@@ -33,13 +33,19 @@ exports.getUserById = async (id) => {
     });
 }
 
-exports.addUser = async (username, password, email) => {
-    const existingUser = await this.getUserByUsername(username)
-    if (existingUser) {
-        throw new BadRequest('user already exists')
+exports.addUser = async (username, password, usermail) => {
+    // const existingUser = await this.getUserByUsername(username)
+    // if (existingUser) {
+    //     throw new BadRequest('user already exists')
+    // }
+    if (!username || !usermail) {
+        throw new Error('Username and usermail are required');
+    }
+    if (!password) {
+        throw new Error('Password is required');
     }
     return bcrypt.hash(password, 10).then((hash) => {
-        return users.create({username, password: hash, email})
+        return users.create({username, password: hash, usermail})
     }).catch((e) => {
         throw new ServerError('Error when performing bcrypt: ', e.message)
     })

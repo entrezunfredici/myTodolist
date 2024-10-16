@@ -6,19 +6,17 @@ const instance = new Sequelize({
     storage: dbConfig.storage
 });
 
-//définir les moddèles :
 const users = require('./users')(instance);
 const todo = require('./todo')(instance);
 const userstodo = require('./userstodo')(instance);
-// Définir les associations :
-userstodo.hasMany(users, {foreignKey: 'userId'});
-users.belongsTo(userstodo, { foreignKey: 'userId'});
-userstodo.hasMany(todo, {foreignKey: 'todoId'})
-todo.belongsTo(userstodo, { foreignKey: 'todoId'});
+//const comments = require('./comments')(instance);
+
+// Définir les associations
+
 
 module.exports = {
     instance,
     users,
     todo,
-    userstodo
+    userstodo,
 };

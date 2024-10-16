@@ -12,7 +12,7 @@ module.exports = (instance) => {
             type: DataTypes.STRING,
             allowNull: false
         },
-        usermail: {
+        email: {
             type: DataTypes.STRING,
             allowNull: false
         },
@@ -22,4 +22,3 @@ module.exports = (instance) => {
         },
     })
 }
-

@@ -21,7 +21,7 @@ exports.authMiddleware = async (req, res, next) => {
     }
 }
 
-exports.getAllUsers = async (req, res, next) => {
+exports.getUsers = async (req, res, next) => {
     try {
         const users = await usersService.getUsers();
         res.json(users);
@@ -30,7 +30,33 @@ exports.getAllUsers = async (req, res, next) => {
     }
 }
 
-exports.getUserByUSername = async (req, res, next) => {
+exports.register = async (req, res, next) => {
+    const {username, password, usermail} = req.body;
+    try {
+        const user = await usersService.addUser(username, password, usermail)
+        if (!user) {
+            throw new ServerError('Cannot register user')
+        }
+        return res.status(201).json(true).send()
+    } catch(e) {
+        return next(createError(e.statusCode, e.message))
+    }
+}
+
+exports.login = async (req, res, next) => {
+    const { username, password } = req.body;
+    try {
+        const token = await usersService.login(username, password);
+        if (token) {
+            return res.status(200).json({ success: true, token });
+        }
+        return res.status(400).json({ success: false, token: ''});
+    } catch(error) {
+        return next(createError(500, error));
+    }
+};
+
+exports.getUserByUsername = async (req, res, next) => {
     try {
         const username = req.params.username;
         const user = await usersService.getUserByUsername(username);
@@ -55,42 +81,3 @@ exports.getUserById = async (req, res, next) => {
         next(new ServerError());
     }
 };
-
-exports.register = async (req, res, next) => {
-    const {username, password, email} = req.body;
-    try {
-        const user = await usersService.addUser(username, password, email)
-        if (!user) {
-            throw new ServerError('Cannot register user')
-        }
-        return res.status(201).json(true).send()
-    } catch(e) {
-        return next(createError(e.statusCode, e.message))
-    }
-}
-
-exports.login = async (req, res, next) => {
-    const { username, password } = req.body;
-    try {
-        const token = await usersService.login(username, password);
-        if (token) {
-            return res.status(200).json({ success: true, token });
-        }
-        return res.status(400).json({ success: false, token: ''});
-    } catch(error) {
-        return next(createError(500, error));
-    }
-};
-
-exports.deleteUser = async (req, res, next) => {
-    const userId = req.params.id;
-    try {
-        const user = await usersService.deleteUser(userId);
-        if (!user) {
-            throw createError(404, 'User not found');
-        }
-        res.json(user);
-    } catch (error) {
-        next(new ServerError());
-    }
-}

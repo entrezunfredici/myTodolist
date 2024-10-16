@@ -1,0 +1,59 @@
+penapi: '3.0.2'
+info:
+  title: todolist_api
+  version: '1.0'
+servers:
+  - url: '{protocol}://{server}'
+    variables:
+      protocol:
+        enum:
+          - http
+          - https
+        default: http
+      server:
+        default: localhost:9000
+tags:
+  - name: "users"
+    description: "Tout les utilisateur"
+  - name: "todo"
+    description: "Toutes les chosesd a faire"
+  - name: "userstodo"
+    description: "lien entre les utilisateurs et les choses a faire"
+paths:
+    /users/register:
+    post: 
+      tags:
+        - "users"
+      summary: "ajouter un utilisateur"
+      operationId: addUser
+      requestBody:
+        description: "doit contenir les informations essentiels soit l'username, le password et le mail"
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/users'
+    /users/login:
+    post: 
+      tags:
+        - "users"
+      summary: "connecter un utilisateur"
+      operationId: loginUser
+      requestBody:
+        description: "doit contenir les informations essentiels soit l'username et le password"
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/users'
+components:
+  schemas:
+    users:
+      type: object
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+        mail:
+          type: string
