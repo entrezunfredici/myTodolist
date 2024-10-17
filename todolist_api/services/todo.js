@@ -33,6 +33,9 @@ exports.editTodo = async (id, title, content, date) => {
         throw new Error('id, title, content and date are required');
     }
     thisTodo = await this.getTodoById(id)
+    if(!thisTodo){
+        throw new NotFound('Todo not found')
+    }
     return await thisTodo.update({title, content, date})
 }
 

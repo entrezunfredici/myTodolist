@@ -16,7 +16,7 @@ module.exports = (instance) => {
             allowNull: false
         },
         date: {
-            type: DataTypes.Date,
+            type: DataTypes.DATE,
             allowNull: false
         }
     })

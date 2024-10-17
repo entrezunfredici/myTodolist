@@ -126,9 +126,22 @@ components:
     users:
       type: object
       properties:
+        id:
+          type: integer
         username:
           type: string
         password:
           type: string
         mail:
           type: string
+    todo:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        description:
+          type: string
+        date:
+          type: date
