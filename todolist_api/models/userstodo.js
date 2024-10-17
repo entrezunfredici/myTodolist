@@ -1,27 +1,20 @@
-const { DataTypes } = require('sequelize');
+const { DataTypes } = require('sequelize'); // Utiliser DataTypes au lieu de DataTypes
 
 module.exports = (instance) => {
-    return instance.define('postsSubjects', {
+    return instance.define('usersTodo', {
         id: {
             type: DataTypes.INTEGER,
+            autoIncrement: true,
             primaryKey: true,
-            autoIncrement: true
+            allowNull: false
         },
-        todoId: {
+        todoid: {
             type: DataTypes.INTEGER,
-            allowNull: false,
-            references: {
-                model: 'posts', // nom du modèle référencé
-                key: 'id'
-            }
+            allowNull: false
         },
-        usersId: {
+        usersid: {
             type: DataTypes.INTEGER,
-            allowNull: false,
-            references: {
-                model: 'subjects', // nom du modèle référencé
-                key: 'id'
-            }
+            allowNull: false
         }
     })
 }

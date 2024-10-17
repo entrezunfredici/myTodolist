@@ -12,6 +12,6 @@ router.post('/register', usersController.register);
 // Route pour la connexion
 router.post('/login', usersController.login);
 
-router.delete('/:id', usersController.deleteUserById)
+router.delete('/:id', usersController.deleteUserById);
 
 module.exports = router;

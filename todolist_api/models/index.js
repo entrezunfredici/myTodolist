@@ -7,16 +7,14 @@ const instance = new Sequelize({
 });
 
 const users = require('./users')(instance);
+//const todo = require('./todo')(instance);
 const todo = require('./todo')(instance);
-const userstodo = require('./userstodo')(instance);
-//const comments = require('./comments')(instance);
 
 // Définir les associations
 
 
 module.exports = {
     instance,
-    users,
     todo,
-    userstodo,
+    users
 };

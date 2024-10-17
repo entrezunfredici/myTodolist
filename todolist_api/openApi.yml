@@ -121,6 +121,114 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/users'
+
+  /todo/{id}:
+    get:
+      tags:
+        - "todo"
+      summary: "récupérer une chose a faire par son id"
+      operationId: "getTodoById"
+      parameters:
+        - name: "id"
+          in: path
+          description: "L'identifiant de la chose a faire"
+          required: true
+          schema:
+            type: "integer"
+      responses:
+        "200":
+          description: "La chose a faire à été trouvé"
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/todo'
+        "404":
+          description: "todo not found"
+    delete:
+      tags:
+        - "todo"
+      summary: "supprimer une chose a faire"
+      operationId: "deleteTodoById"
+      parameters:
+        - name: "id"
+          in: "path"
+          description: "L'identifiant de la chose a faire"
+          required: true
+          schema: 
+            type: "integer"
+      responses:
+        "201":
+          description: "La chose a faire à été supprimé"
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/todo'
+        "404":
+          description: "todo not found"
+
+  /todo/title/{title}:
+    get:
+      tags:
+        - "todo"
+      summary: "récupérer une chose a faire par son titre"
+      operationId: "getTodoByName"
+      parameters:
+        - title: "title"
+          in: "path"
+          description: "Le titre de la chose a faire"
+          required: true
+          schema: 
+            type: "string"
+      responses:
+        "200":
+          description: "La chose a faire à été trouvé"
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/todo'
+        "404":
+          description: "todo not found"
+
+  /todo/add:
+    post: 
+      tags:
+        - "todo"
+      summary: "ajouter une chose a faire"
+      operationId: addTodo
+      requestBody:
+        description: "doit contenir les informations essentiels soit le nom, la description et la date"
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/todo'
+      responses:
+        "201":
+          description: "Ajoute une chose a faire"
+          content: true
+        "400": 
+          description: "Un champs essentiels n'est pas présent ou incorrect (name, description, date)"
+
+  /todo/edit:
+    post: 
+      tags:
+        - "todo"
+      summary: "modifier une chose a faire"
+      operationId: editTodo
+      requestBody:
+        description: "doit contenir les informations essentiels soit l'id, le nom, la description et la date"
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/todo'
+      responses:
+        "201":
+          description: "La chose a faire à été modifié"
+          content: true
+        "400": 
+          description: "Un champs essentiels n'est pas présent ou incorrect (id, name, description, date)"
+
 components:
   schemas:
     users:
@@ -139,7 +247,7 @@ components:
       properties:
         id:
           type: integer
-        name:
+        title:
           type: string
         description:
           type: string

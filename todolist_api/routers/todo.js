@@ -13,3 +13,5 @@ router.post('/add', todoController.addTodo);
 router.post('/edit', todoController.editTodo);
 //route for delete todo
 router.delete('/:id', todoController.deleteTodoById);
+
+module.exports = router;
