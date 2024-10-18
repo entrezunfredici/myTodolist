@@ -229,6 +229,7 @@ paths:
         "400": 
           description: "Un champs essentiels n'est pas présent ou incorrect (id, name, description, date)"
 
+
 components:
   schemas:
     users:
@@ -253,3 +254,12 @@ components:
           type: string
         date:
           type: string
+    usersTodos:
+      type: object
+      properties:
+        id:
+          type: integer
+        id_user:
+          type: integer
+        id_todo:
+          type: integer

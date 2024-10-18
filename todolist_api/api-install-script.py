@@ -38,8 +38,8 @@ commands= {
     "npm install express-openapi-validator",
     "npm install cors",
     "npm install dotenv",
-    "npm install swagger",
-    "npm install husky --save-dev",
+    "npm install swagger-jsdoc",
+    "npm install swagger-ui-express swagger-jsdoc --save",
 }
 #inquirer is a library that allows you to ask questions to the user
 questions = [inquirer.List("choise", message="que voulez vous faire", choices=choises)]
