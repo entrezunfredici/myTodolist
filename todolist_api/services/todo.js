@@ -1,20 +1,20 @@
-const { todo } = require('../models');
+const { todos } = require('../models');
 const { NotFound, NotLogged, BadRequest, ServerError } = require('../errors');
 
 exports.getTodos = async () => {
-    return await todo.findAll()
+    return await todos.findAll();
 }
 
 exports.getTodoByTitle = async (title) => {
-    return await todo.findOne({
+    return await todos.findOne({
         where: {
             title
         }
-    })
+    });
 }
 
 exports.getTodoById = async (id) => {
-    return await todo.findOne({
+    return await todos.findOne({
         where: {
             id
         }
@@ -22,32 +22,32 @@ exports.getTodoById = async (id) => {
 }
 
 exports.addTodo = async (title, content, date) => {
-    if (!title || !content || date) {
-        throw new Error('title, content and date are required');
+    if (!title || !content || !date) {
+        throw new BadRequest('title, content and date are required');
     }
-    return await todo.create({title, content, date})
+    return todos.create({ title, content, date });  // Use 'todos' instead of 'todo'
 }
 
 exports.editTodo = async (id, title, content, date) => {
-    if (!id || !title || !content || date) {
-        throw new Error('id, title, content and date are required');
+    if (!id || !title || !content || !date) {  // Corrected condition
+        throw new BadRequest('id, title, content and date are required');
     }
-    thisTodo = await this.getTodoById(id)
-    if(!thisTodo){
-        throw new NotFound('Todo not found')
+    const thisTodo = await exports.getTodoById(id);  // Use 'exports.getTodoById'
+    if (!thisTodo) {
+        throw new NotFound('Todo not found');
     }
-    return await thisTodo.update({title, content, date})
+    return thisTodo.update({ title, content, date });
 }
 
 exports.deleteTodoById = async (id) => {
-    try{
-        await todo.destroy({
-            where:{
+    try {
+        await todos.destroy({  // Use 'todos' instead of 'todo'
+            where: {
                 id
             }
         });
         return true;
-    }catch(e){
+    } catch (e) {
         throw new ServerError(e.message);
     }
 }

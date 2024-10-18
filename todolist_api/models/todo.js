@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize');
 
 module.exports = (instance) => {
-    return instance.define('todo', {
+    return instance.define('todos', {
         id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
@@ -16,7 +16,7 @@ module.exports = (instance) => {
             allowNull: false
         },
         date: {
-            type: DataTypes.DATE,
+            type: DataTypes.STRING,
             allowNull: false
         }
     })

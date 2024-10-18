@@ -16,6 +16,7 @@
     "express": "^4.21.1",
     "express-openapi-validator": "^5.3.7",
     "http-errors": "^2.0.0",
+    "husky": "^9.1.6",
     "jsonwebtoken": "^9.0.2",
     "mysql2": "^3.11.3",
     "sequelize": "^6.37.4",

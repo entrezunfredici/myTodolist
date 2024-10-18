@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize'); // Utiliser DataTypes au lieu de DataTypes
 
 module.exports = (instance) => {
-    return instance.define('usersTodo', {
+    return instance.define('usersTodos', {
         id: {
             type: DataTypes.INTEGER,
             autoIncrement: true,

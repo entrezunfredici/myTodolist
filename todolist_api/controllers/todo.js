@@ -1,4 +1,4 @@
-const todoService = require('../services/users');
+const todoService = require('../services/todo');
 const createError = require('http-errors');
 const { ServerError } = require('../errors');
 

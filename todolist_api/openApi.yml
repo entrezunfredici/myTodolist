@@ -15,7 +15,7 @@ servers:
 tags:
   - name: "users"
     description: "Tout les utilisateur"
-  - name: "todo"
+  - name: "todos"
     description: "Toutes les chosesd a faire"
   - name: "userstodo"
     description: "lien entre les utilisateurs et les choses a faire"
@@ -125,7 +125,7 @@ paths:
   /todo/{id}:
     get:
       tags:
-        - "todo"
+        - "todos"
       summary: "récupérer une chose a faire par son id"
       operationId: "getTodoById"
       parameters:
@@ -146,7 +146,7 @@ paths:
           description: "todo not found"
     delete:
       tags:
-        - "todo"
+        - "todos"
       summary: "supprimer une chose a faire"
       operationId: "deleteTodoById"
       parameters:
@@ -169,7 +169,7 @@ paths:
   /todo/title/{title}:
     get:
       tags:
-        - "todo"
+        - "todos"
       summary: "récupérer une chose a faire par son titre"
       operationId: "getTodoByName"
       parameters:
@@ -192,7 +192,7 @@ paths:
   /todo/add:
     post: 
       tags:
-        - "todo"
+        - "todos"
       summary: "ajouter une chose a faire"
       operationId: addTodo
       requestBody:
@@ -212,7 +212,7 @@ paths:
   /todo/edit:
     post: 
       tags:
-        - "todo"
+        - "todos"
       summary: "modifier une chose a faire"
       operationId: editTodo
       requestBody:
@@ -252,4 +252,4 @@ components:
         description:
           type: string
         date:
-          type: date
+          type: string
