@@ -39,6 +39,7 @@ commands= {
     "npm install cors",
     "npm install dotenv",
     "npm install swagger-jsdoc",
+    "npm install -g jslint-node",
     "npm install swagger-ui-express swagger-jsdoc --save",
 }
 #inquirer is a library that allows you to ask questions to the user

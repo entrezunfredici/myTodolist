@@ -7,6 +7,8 @@ const cors = require('cors');
 
 const app = express();
 
+//var linter = require("jslint-node");
+
 app.use(cors());
 app.use(express.json());
 
