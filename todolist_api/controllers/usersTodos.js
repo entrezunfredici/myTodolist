@@ -43,6 +43,9 @@ exports.getUsersTodosByTodoId = async (req, res, next) => {
 exports.addUsersTodos = async (req, res, next) => {
     try {
         const { userId, todoId } = req.body;
+        if (!userId || !todoId) {
+            throw createError(400, 'userId and todoId are required');
+        }
         const usersTodos = await usersTodosService.addUsersTodos(userId, todoId);
         res.json(usersTodos);
     } catch (error) {

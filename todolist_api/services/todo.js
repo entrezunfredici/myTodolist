@@ -25,7 +25,7 @@ exports.addTodo = async (title, content, date) => {
     if (!title || !content || !date) {
         throw new BadRequest('title, content and date are required');
     }
-    return todos.create({ title, content, date });  // Use 'todos' instead of 'todo'
+    return todos.create({ title, content, date });
 }
 
 exports.editTodo = async (id, title, content, date) => {
