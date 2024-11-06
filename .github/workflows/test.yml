@@ -14,9 +14,6 @@ jobs:
       - name: Install dependencies
         working-directory: todolist_api
         run: npm install
-      - name: Build
-        working-directory: todolist_api
-        run: npm run build
       - name: Test
         working-directory: todolist_api
         run: npm run test
