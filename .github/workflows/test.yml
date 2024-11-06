@@ -11,9 +11,15 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Install dependencies
+      - name: API - Install dependencies
         working-directory: todolist_api
         run: npm install
-      - name: Test
+      - name: FRONT - Install dependencies
+        working-directory: todolist_front
+        run: ng test
+      - name: API - Test
         working-directory: todolist_api
         run: npm run test
+      - name: FRONT - Test
+        working-directory: todolist_front
+        run: ng test
