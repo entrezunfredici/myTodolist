@@ -12,13 +12,13 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const usersrouter = require('./routers/users')
+const usersrouter = require('../routers/users')
 app.use('/users', usersrouter)
 
-const todorouter = require('./routers/todo')
+const todorouter = require('../routers/todo')
 app.use('/todo', todorouter)
 
-const usersTodosrouter = require('./routers/usersTodos')
+const usersTodosrouter = require('../routers/usersTodos')
 app.use('/usersTodos', usersTodosrouter)
 
 // Options pour SwaggerJsdoc
