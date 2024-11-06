@@ -4,7 +4,7 @@
   "description": "api de la totdolist",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\"",
+    "test": "jest",
     "start": "nodemon server.js",
     "build": "npm start"
   },
@@ -33,5 +33,10 @@
     "jest": "^29.7.0",
     "nodemon": "^3.1.7",
     "supertest": "^7.0.0"
+  },
+  "jest": {
+    "testMatch": [
+      "**/?(*.)+(spec|test).[tj]s?(x)"
+    ]
   }
 }
