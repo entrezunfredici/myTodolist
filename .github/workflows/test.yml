@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - 'dev_*'
+      - 'dev'
 jobs:
   test:
     runs-on: ubuntu-latest
