@@ -18,6 +18,6 @@ jobs:
         run: npm run test
       - name: Send message to Discord
         run: |
-        curl -X POST -H "Content-Type: application/json" \
-        -d '{"content": "deploy success Bitch ! https://tenor.com/view/rosycheeks-approved-i-approve-well-done-good-job-gif-16996150"}' \
-        ${{ secrets.DISCORD_MOTHER_FUCKER }}
+          curl -X POST -H "Content-Type: application/json" \
+          -d '{"content": "deploy success Bitch !"}' \
+          ${{ secrets.DISCORD_MOTHER_FUCKER }}
