@@ -51,13 +51,4 @@ app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
 
-// Middleware to validate the request and response against the OpenAPI schema
-// app.use(
-//     OpenApiValidator.middleware({
-//         apiSpec: './openApi.yml',
-//         validateResponses: true,
-//         ignoreUndocumented: true
-//     })
-// );
-
 module.exports = app;
